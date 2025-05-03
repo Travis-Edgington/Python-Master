@@ -42,14 +42,53 @@
 # my_Dog3.desctiption()
 
 
-class Policy:
-    def __init__(self, number, premium):
-        self.number=number
-        self.premium=premium
+# class Policy:
+#     def __init__(self, number, premium):
+#         self.number=number
+#         self.premium=premium
     
-    @classmethod
-    def from_string(cls, policy_string):
-        number, premium=policy_string.split(",")
-        return cls(number, float(premium))
-policy=Policy.from_string("ABCD123,1200")
-print(policy.number, policy.premium)
+#     @classmethod
+#     def from_string(cls, policy_string):
+#         number, premium=policy_string.split(",")
+#         return cls(number, float(premium))
+# policy=Policy.from_string("ABCD123,1200")
+# print(policy.number, policy.premium)
+
+import datetime
+
+class Policy:
+    def __init__(self, policy_number, written_premium, effective_date, expiration_date):
+        self.policy_number=policy_number
+        self.written_premium=written_premium
+        self.effective_date=effective_date
+        self.expiration_date=expiration_date
+        self.claims=[]
+
+    def add_claim(self, claim_amount):
+        self.claims.append(claim_amount)
+    def total_claims(self):
+        return sum(self.claims)
+    def earned_premium(self, calendar_start, calendar_end):
+        start=max(self.effective_date, calendar_start)
+        end=max(self.expiration_date, calendar_end)
+        overlap_days=max((end-start).days,0)
+        policy_days=(self.expiration_date-self.effective_date).days
+
+        if policy_days==0:
+            return 0
+        return self.written_premium*(overlap_days/policy_days)
+    
+    def loss_ratio(self, calendar_start, calendar_end):
+        earned=self.earned_premium(calendar_start, calendar_end)
+        if earned ==0:
+            return 0
+        return self.total_claims()/earned
+
+ 
+calendar_start=datetime.date(2020,1,1)
+calendar_end=datetime.date(2021,6,1)   
+test_Polciy=Policy("ABCD124", 1000, datetime.date(2021,1,1), datetime.date(2021,7,1))
+print(test_Polciy.earned_premium(calendar_start, calendar_end))
+
+
+
