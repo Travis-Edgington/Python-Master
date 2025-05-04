@@ -151,13 +151,14 @@ def multiply_by_two(func):
         return 2*result
     return wrapper
 
-#@multiply_by_two
+#$@multiply_by_two
 def Two():
     return 2
 
-x=multiply_by_two(Two)
 
-Two()
+Two=multiply_by_two(Two)
+print (Two())
+
 
 
 
