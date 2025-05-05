@@ -144,25 +144,65 @@
 
 
 # say_hello()
-def multiply_by_two(func):
+# def multiply_by_two(func):
 
-    def wrapper():
-        result=func()
-        return 2*result
-    return wrapper
+#     def wrapper():
+#         result=func()
+#         return 2*result
+#     return wrapper
 
-#$@multiply_by_two
-def Two():
-    return 2
-
-
-Two=multiply_by_two(Two)
-print (Two())
+# #@multiply_by_two
+# def Two():
+#     return 2
 
 
+# Two=multiply_by_two(Two)
+# print (Two())
 
 
+#Why do we use classes
 
+#lets do things without classes
 
+# #Policy 1
+# policy1_number="A123"
+# policy1_premium=1000
+# policy1_claims=[200,300]
 
+# #Policy number 2
+# policy2_number="B456"
+# policy2_premium=1200
+# policy2_claims=[500]
+
+# def total_claims(claims):
+#     return sum(claims)
+
+# #without classes
+# print(total_claims(policy1_claims))
+
+class Policy:
+    def __init__(self, number, premium):
+        self.number=number
+        self.premium=premium
+        self.claim=[] #create and attribute of the class that is not input
+
+    def add_claim(self,amount):
+        self.claim.append(amount)
+    
+    def total_claims(self):
+        return sum(self.claim)
+    
+    def loss_ratio(self):
+        if self.premium==0:
+            return 0
+        return self.total_claims()/self.premium
+
+policy1=Policy("A123",1000)
+policy2=Policy("B456",1200)
+
+policy1.add_claim(100)
+policy2.add_claim(300)
+
+policy1.loss_ratio()
+print(policy1.loss_ratio())
 
