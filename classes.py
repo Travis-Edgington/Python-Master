@@ -197,12 +197,17 @@ class Policy:
             return 0
         return self.total_claims()/self.premium
 
-policy1=Policy("A123",1000)
-policy2=Policy("B456",1200)
+# policy1=Policy("A123",1000)
+# policy2=Policy("B456",1200)
 
-policy1.add_claim(100)
-policy2.add_claim(300)
+# policy1.add_claim(900)
+# policy2.add_claim(300)
 
-policy1.loss_ratio()
-print(policy1.loss_ratio())
+# policy1.loss_ratio()
+# print(f"The loss ration for policy1 is {policy1.loss_ratio()}")
 
+# print(f"The total claims for policy 1 is {policy1.total_claims()}")
+# print(f"The total claims for policy 2 is {policy2.total_claims()}")
+type(Policy)
+
+print(Policy.__dict__)
